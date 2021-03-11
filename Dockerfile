@@ -6,7 +6,7 @@
 #    By: spark <spark@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/11 13:33:41 by spark             #+#    #+#              #
-#    Updated: 2021/03/11 16:05:31 by spark            ###   ########.fr        #
+#    Updated: 2021/03/11 22:17:01 by spark            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,11 @@ LABEL maintainer="spark <spark.42seoul.kr>"
 
 #기반파일들을 다운로드 및 업데이트
 RUN apt update -y
-RUN apt install nginx curl php-fpm mariadb-server php-mysql vim  -y
-RUN docker cp ./srcs/phpMyAdmin-5.0.2-all-languages.tar.gz ./
+RUN apt install nginx curl php-fpm mariadb-server php-mysql openssl vim -y
 
+
+COPY ./srcs/phpMyAdmin-5.0.2-all-languages.tar.gz ./
+COPY ./srcs/* ./
 
 #ssl 키 발급 및 연동
 RUN openssl genrsa -out ft_server.localhost.key 4096; \
@@ -37,6 +39,9 @@ RUN openssl genrsa -out ft_server.localhost.key 4096; \
 	chmod 644 ft_server.localhost.*; \
 	mv ft_server.localhost.crt /etc/ssl/certs/;	\
 	mv ft_server.localhost.key /etc/ssl/private/
+
+CMD bash test.sh
+
 
 # #nginx 구동
 # RUN service nginx start
