@@ -84,7 +84,7 @@ server	{
 	#index index.php index.html index.htm;
 	index index.php index.html index.htm index.php;
 
-	autoindex on;
+	autoindex off;
 
         server_name _;
 
