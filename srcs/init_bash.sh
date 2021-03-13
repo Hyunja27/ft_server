@@ -33,6 +33,14 @@ mv phpmyadmin /var/www/html/
 
 service mysql reload
 service php7.3-fpm reload
+
+mv /var/www/html/index.nginx-debian.html /var/www/html/index.html
+
+# autoindex 기능 활성화를 원한다면, 다음 파일을 수정
+#mv /var/www/html/index.html /var/www/html/index.nginx-debian.html
+#vim etc/nginx/sites-available/default
+#default autoindex 라인 on
+
 echo ===============================================
 echo = make all ft_server\'s requirement! enjoy it! =
 echo ===============================================
